@@ -2,14 +2,8 @@
 layout: default
 ---
 
-{% assign post_title = content
-  | split: '</h1>'
-  | first
-  | split: '>'
-  | last
-  | strip_html
-  | strip
-%}
+{% assign post_html = post.content | markdownify %}
+{% assign post_title = post_html | split: '</h1>' | first | split: '>' | last | strip_html | strip %}
 
 <div class="post-layout">
 
