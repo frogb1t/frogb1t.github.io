@@ -24,7 +24,8 @@ layout: default
     <hr>
 
     <div class="prose" id="post-content">
-      {{ content | remove_first: post_html | default: content }}
+      {% assign post_body = content | remove_first: post_title %}
+      {{ post_body | remove_first: '#' | strip }}
     </div>
 
     {% include related_posts.html %}
