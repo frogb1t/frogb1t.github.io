@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Validation - HTB"
 description: ""
 date: 2026-04-25
 category: hackthebox
 tags: [linux, easy, sqli union based, sql, second order]
 ---
+
+# Validation - HTB
 
 ## Enumeration
 

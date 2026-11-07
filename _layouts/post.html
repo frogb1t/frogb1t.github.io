@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+{% assign post_title = content | split: '</h1>' | first | split: '<h1' | last | split: '>' | last | strip_html | strip %}
+
 <div class="post-layout">
 
   <article>
@@ -9,7 +12,9 @@ layout: default
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time>
         {% if page.category %} · {{ page.category }}{% endif %}
       </div>
-      <h1 class="post-title">{{ page.title }}</h1>
+
+      <h1 class="post-title">{{ post_title }}</h1>
+
       {% if page.description %}
       <p class="post-subtitle">{{ page.description }}</p>
       {% endif %}
@@ -18,7 +23,7 @@ layout: default
     <hr>
 
     <div class="prose" id="post-content">
-      {{ content }}
+      {{ content | remove_first: '</h1>' | split: '<h1' | last | prepend: '' }}
     </div>
 
     {% include related_posts.html %}
@@ -46,14 +51,16 @@ layout: default
     toc.appendChild(a);
   });
 
-  // Highlight active section on scroll
   var items = toc.querySelectorAll('.toc-item');
+
   window.addEventListener('scroll', function() {
     var scrollY = window.scrollY + 80;
     var current = 0;
+
     headings.forEach(function(h, i) {
       if (h.offsetTop <= scrollY) current = i;
     });
+
     items.forEach(function(a, i) {
       a.classList.toggle('active', i === current);
     });
