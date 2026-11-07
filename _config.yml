@@ -4,9 +4,8 @@ url: ""
 baseurl: ""
 
 # Social links (edit or remove)
-github_url: "https://github.com/username"
-htb_url: "https://app.hackthebox.com/users/0"
-twitter_url: "https://twitter.com/username"
+github_url: "https://github.com/frogb1t"
+htb_url: "https://app.hackthebox.com/users/1560890"
 
 # Jekyll settings
 permalink: /:title/
@@ -24,10 +23,6 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-
-# Server
-host: 0.0.0.0
-port: 4000
 
 exclude:
   - Gemfile
