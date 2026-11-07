@@ -1,0 +1,120 @@
+---
+---
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Base */
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  background: #111111;
+  color: #888888;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 48px 80px; }
+
+/* Site Header */
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32px 0; border-bottom: 1px solid #191919; margin-bottom: 0;
+}
+.site-title { font-size: 14px; font-weight: 600; color: #e8e8e8; text-decoration: none; }
+.site-nav { display: flex; gap: 20px; }
+.site-nav a { font-size: 13px; color: #333333; text-decoration: none; }
+.site-nav a:hover { color: #555555; }
+
+/* Post List */
+.post-list { list-style: none; }
+.post-list-item { border-bottom: 1px solid #191919; }
+.post-list-link {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: baseline; gap: 24px; padding: 20px 0; text-decoration: none;
+}
+.post-list-link:hover .post-list-title { color: #e8e8e8; }
+.post-list-title { font-size: 20px; font-weight: 600; color: #bbbbbb; letter-spacing: -0.4px; line-height: 1.2; transition: color 0.1s; }
+.post-list-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.post-list-date { font-size: 12px; color: #333333; }
+.post-list-cat { font-size: 11px; color: #2a2a2a; text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* Post Page */
+.post-layout { display: grid; grid-template-columns: 1fr 200px; gap: 64px; padding-top: 48px; align-items: start; }
+.post-meta { font-size: 12px; color: #333333; margin-bottom: 12px; }
+.post-title { font-size: 26px; font-weight: 700; color: #e8e8e8; letter-spacing: -0.5px; line-height: 1.25; margin-bottom: 12px; }
+.post-subtitle { font-size: 14px; color: #555555; line-height: 1.65; margin-bottom: 36px; }
+hr { border: none; border-top: 1px solid #1e1e1e; margin: 28px 0; }
+
+/* Prose */
+.prose h1, .prose h2, .prose h3, .prose h4 { color: #e8e8e8; font-weight: 600; margin: 32px 0 10px; letter-spacing: -0.3px; }
+.prose h2 { font-size: 16px; }
+.prose h3 { font-size: 14.5px; color: #aaaaaa; }
+.prose p { font-size: 14.5px; color: #888888; margin-bottom: 16px; line-height: 1.8; }
+.prose a { color: #7aa2f7; text-decoration: none; }
+.prose a:hover { text-decoration: underline; }
+.prose ul, .prose ol { padding-left: 20px; margin-bottom: 16px; }
+.prose li { font-size: 14.5px; color: #888888; margin-bottom: 4px; line-height: 1.75; }
+.prose strong { color: #aaaaaa; font-weight: 600; }
+.prose em { font-style: italic; }
+.prose code {
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12px; background: #161616; border: 1px solid #2a2a2a;
+  border-radius: 3px; padding: 1px 5px; color: #c084fc;
+}
+.prose pre {
+  background: #141414; border: 1px solid #1e1e1e; border-radius: 6px;
+  padding: 16px 18px; overflow-x: auto; margin: 20px 0;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 12.5px; line-height: 1.8; color: #888888;
+}
+.prose pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+.prose blockquote { border-left: 2px solid #2a2a2a; padding: 10px 16px; margin: 20px 0; }
+.prose blockquote p { font-size: 13px; color: #555555; margin: 0; }
+.prose img { max-width: 100%; border-radius: 6px; border: 1px solid #1e1e1e; margin: 20px 0; display: block; }
+.prose table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.prose th { text-align: left; color: #666666; font-weight: 500; border-bottom: 1px solid #1e1e1e; padding: 8px 12px; }
+.prose td { color: #888888; border-bottom: 1px solid #191919; padding: 8px 12px; }
+
+/* Code block with header */
+.highlight-wrap { margin: 20px 0; border-radius: 6px; overflow: hidden; border: 1px solid #1e1e1e; }
+.highlight-header { display: flex; justify-content: space-between; align-items: center; padding: 6px 14px; background: #161616; border-bottom: 1px solid #1e1e1e; }
+.highlight-header .lang { font-size: 11px; font-family: monospace; color: #333333; }
+.highlight-header .copy-btn { font-size: 11px; color: #333333; background: none; border: none; cursor: pointer; font-family: inherit; }
+.highlight-header .copy-btn:hover { color: #555555; }
+.highlight-header .copy-btn.copied { color: #3fb950; }
+.highlight-wrap pre { margin: 0; border: none; border-radius: 0; }
+
+/* Syntax highlight */
+.highlight .c, .highlight .cm, .highlight .c1 { color: #333333; font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kr { color: #f7768e; }
+.highlight .s, .highlight .s1, .highlight .s2 { color: #9ece6a; }
+.highlight .n, .highlight .nb, .highlight .nf { color: #7aa2f7; }
+.highlight .m, .highlight .mi, .highlight .mf { color: #ff9e64; }
+.highlight .o, .highlight .ow { color: #bb9af7; }
+.highlight .p { color: #888888; }
+
+/* TOC Sidebar */
+.post-sidebar { position: sticky; top: 32px; }
+.toc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #2a2a2a; margin-bottom: 12px; }
+.toc-item { display: block; font-size: 12.5px; color: #3a3a3a; text-decoration: none; padding: 4px 0 4px 12px; border-left: 2px solid #191919; margin-bottom: 2px; transition: color 0.1s, border-color 0.1s; }
+.toc-item:hover { color: #888888; border-color: #333333; }
+.toc-item.active { color: #bbbbbb; border-color: #555555; }
+.toc-item--h3 { padding-left: 22px; font-size: 12px; }
+
+/* Footer */
+.site-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid #191919; display: flex; justify-content: space-between; align-items: center; }
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { font-size: 12px; color: #333333; text-decoration: none; }
+.footer-links a:hover { color: #555555; }
+.footer-copy { font-size: 11px; color: #2a2a2a; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 0 18px 60px; }
+  .post-title { font-size: 20px; }
+  .post-list-title { font-size: 15px; }
+  .post-layout { grid-template-columns: 1fr; gap: 0; }
+  .post-sidebar { display: none; }
+}
