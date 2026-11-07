@@ -1,0 +1,30 @@
+title: "Fr0gB1t"
+description: "Security researcher · CTF player"
+url: ""
+baseurl: ""
+
+# Social links (edit or remove)
+github_url: "https://github.com/username"
+htb_url: "https://app.hackthebox.com/users/0"
+
+# Jekyll settings
+permalink: /:title/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    block:
+      line_numbers: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

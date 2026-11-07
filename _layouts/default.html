@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <nav class="site-nav">
+        <a href="{{ '/' | relative_url }}">posts</a>
+        <a href="{{ '/about' | relative_url }}">about</a>
+        <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+      </nav>
+    </header>
+
+    {{ content }}
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        {% if site.github_url %}<a href="{{ site.github_url }}" target="_blank" rel="noopener">github</a>{% endif %}
+        {% if site.htb_url %}<a href="{{ site.htb_url }}" target="_blank" rel="noopener">hackthebox</a>{% endif %}
+        {% if site.twitter_url %}<a href="{{ site.twitter_url }}" target="_blank" rel="noopener">twitter</a>{% endif %}
+      </div>
+      <span class="footer-copy">© {{ site.time | date: '%Y' }}</span>
+    </footer>
+  </div>
+
+  <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% assign maxRelated = 4 %}
+{% assign minCommonTags = 1 %}
+{% assign related = "" | split: "" %}
+
+{% for post in site.posts %}
+  {% if post.url == page.url %}{% continue %}{% endif %}
+  {% assign commonTags = 0 %}
+  {% for tag in page.tags %}
+    {% if post.tags contains tag %}
+      {% assign commonTags = commonTags | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if commonTags >= minCommonTags %}
+    {% assign related = related | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% assign recent = site.posts | where_exp: "p", "p.url != page.url" | limit: maxRelated %}
+{% assign show = related | default: recent | limit: maxRelated %}
+
+{% if show.size > 0 %}
+<div style="margin-top: 56px; border-top: 1px solid #191919; padding-top: 24px;">
+  <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#333;margin-bottom:16px;">posts</p>
+  <ul class="post-list">
+    {% for p in show %}
+    <li class="post-list-item">
+      <a class="post-list-link" href="{{ p.url | relative_url }}" style="padding: 11px 0;">
+        <span class="post-list-title" style="font-size:13.5px;font-weight:400;">{{ p.title }}</span>
+        <span class="post-list-date">{{ p.date | date: "%d %b %Y" }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

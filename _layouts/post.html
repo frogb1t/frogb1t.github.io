@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<div class="post-layout">
+
+  <article>
+    <header>
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time>
+        {% if page.category %} · {{ page.category }}{% endif %}
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.description %}
+      <p class="post-subtitle">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    <hr>
+
+    <div class="prose" id="post-content">
+      {{ content }}
+    </div>
+
+    {% include related_posts.html %}
+  </article>
+
+  <aside class="post-sidebar">
+    <div class="toc-label">contents</div>
+    <nav id="toc"></nav>
+  </aside>
+
+</div>
+
+<script>
+(function() {
+  var headings = document.querySelectorAll('#post-content h2, #post-content h3');
+  var toc = document.getElementById('toc');
+  if (!toc || headings.length === 0) return;
+
+  headings.forEach(function(h, i) {
+    if (!h.id) h.id = 'h-' + i;
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    a.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-item--h3' : '');
+    toc.appendChild(a);
+  });
+
+  // Highlight active section on scroll
+  var items = toc.querySelectorAll('.toc-item');
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY + 80;
+    var current = 0;
+    headings.forEach(function(h, i) {
+      if (h.offsetTop <= scrollY) current = i;
+    });
+    items.forEach(function(a, i) {
+      a.classList.toggle('active', i === current);
+    });
+  }, { passive: true });
+})();
+</script>
