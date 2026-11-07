@@ -2,7 +2,7 @@
 layout: default
 ---
 
-{% assign post_html = post.content | markdownify %}
+{% assign post_html = content | markdownify %}
 {% assign post_title = post_html | split: '</h1>' | first | split: '>' | last | strip_html | strip %}
 
 <div class="post-layout">
@@ -24,7 +24,7 @@ layout: default
     <hr>
 
     <div class="prose" id="post-content">
-      {{ content | remove_first: '</h1>' | split: '<h1' | last | prepend: '' }}
+      {{ content | remove_first: post_html | default: content }}
     </div>
 
     {% include related_posts.html %}
