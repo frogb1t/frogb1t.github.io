@@ -39,6 +39,7 @@ body {
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ─── Layout ────────────────────────────────────────────────────────────── */
@@ -143,10 +144,15 @@ body {
 /* ─── Post Page ─────────────────────────────────────────────────────────── */
 .post-layout {
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: minmax(0, 1fr) 200px;
   gap: 64px;
   padding-top: 48px;
   align-items: start;
+  min-width: 0;
+}
+
+.post-layout > * {
+  min-width: 0;
 }
 
 .post-meta {
@@ -219,6 +225,10 @@ hr {
 }
 
 /* ─── Prose ─────────────────────────────────────────────────────────────── */
+.prose {
+  min-width: 0;
+}
+
 .prose h1,
 .prose h2,
 .prose h3,
@@ -295,6 +305,8 @@ hr {
   border-radius: 6px;
   padding: 16px 18px;
   overflow-x: auto;
+  max-width: 100%;
+  white-space: pre;
   margin: 20px 0;
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -360,6 +372,8 @@ hr {
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .highlight-wrap .highlight-header {
@@ -399,6 +413,9 @@ hr {
   margin: 0;
   border: none;
   border-radius: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 /* ─── Syntax highlight (dark, minimal) ──────────────────────────────────── */
@@ -511,7 +528,7 @@ hr {
   }
 
   .post-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0;
   }
 
