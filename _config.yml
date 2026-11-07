@@ -1,7 +1,7 @@
 title: "Fr0gB1t"
 description: "Security researcher · CTF player"
-url: ""
-baseurl: ""
+url: "https://frogb1t.github.io/"
+baseurl: "/"
 
 # Social links (edit or remove)
 github_url: "https://github.com/username"
