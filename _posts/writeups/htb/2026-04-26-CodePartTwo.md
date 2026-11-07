@@ -874,5 +874,3 @@ Last login: Wed Sep 17 17:56:03 2025 from 10.10.14.209
 root@codeparttwo:~# whoami
 root
 ```
-
--- -
