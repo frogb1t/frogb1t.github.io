@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "CodePartTwo - HTB"
 description: ""
 date: 2026-04-26
 category: hackthebox
 tags: [linux, easy, code review, npbackup, rce]
 ---
+
+# CodePartTwo - HTB
 
 ## Enumeration
 
