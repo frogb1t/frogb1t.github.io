@@ -1,0 +1,37 @@
+---
+layout: default
+title: búsqueda
+permalink: /search/
+---
+
+<script>
+window.POSTS = [
+  {% for post in site.posts %}
+  {
+    "title":   {{ post.title | jsonify }},
+    "url":     {{ post.url | relative_url | jsonify }},
+    "date":    {{ post.date | date: "%d %b %Y" | jsonify }},
+    "time":    {{ post.reading_time | jsonify }},
+    "tags":    {{ post.tags | join: " " | downcase | jsonify }},
+    "excerpt": {{ post.excerpt | strip_html | truncate: 200 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+</script>
+
+<div class="page-header">
+  <div class="page-title">búsqueda</div>
+  <div class="page-rule"></div>
+</div>
+
+<div class="search-box">
+  <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+    <circle cx="5" cy="5" r="3.5" stroke="#666" stroke-width="1.2"/>
+    <line x1="8" y1="8" x2="11" y2="11" stroke="#666" stroke-width="1.2"/>
+  </svg>
+  <input id="search-input" type="text" placeholder="buscar por título, tag o contenido…" autocomplete="off">
+</div>
+
+<div class="post-list" id="search-results"></div>
+<p class="no-results" id="search-no-results">No hay resultados.</p>
+<p class="search-hint"  id="search-hint">Escribe algo para buscar entre los artículos.</p>

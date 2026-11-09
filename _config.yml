@@ -1,0 +1,37 @@
+title: "seclog"
+description: "Security researcher. CTF player. Escribo lo que aprendo."
+
+author:
+  name:       "tuusuario"
+  bio:        "Security researcher. CTF player. Escribo lo que aprendo."
+  avatar:     ""          # opcional: "/assets/img/avatar.jpg"
+  github:     "https://github.com/tuusuario"
+  twitter:    "https://twitter.com/tuusuario"
+  hackthebox: "https://app.hackthebox.com/users/tuusuario"
+  linkedin:   "https://linkedin.com/in/tuusuario"
+
+url:     "https://tuusuario.github.io"   # cambia esto
+baseurl: ""                               # deja vacío para user pages (usuario.github.io)
+
+permalink: /:year/:month/:day/:title/
+
+markdown:   kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - "*.sh"
+  - vendor/

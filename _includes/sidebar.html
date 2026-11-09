@@ -1,0 +1,50 @@
+<!-- Strip shown when sidebar is hidden -->
+<button class="sb-open-btn" onclick="toggleSidebar()">&gt;&gt;</button>
+
+<aside class="sidebar">
+  <div class="sb-topbar">
+    <button class="sb-toggle" onclick="toggleSidebar()">&lt;&lt;</button>
+  </div>
+
+  <div class="sidebar-scroll">
+
+    <div class="sb-avatar">
+      {% if site.author.avatar %}
+        <img src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}">
+      {% else %}
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8" r="4" stroke="#888" stroke-width="1.5"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      {% endif %}
+    </div>
+
+    <div class="sb-name">{{ site.author.name }}</div>
+    <div class="sb-bio">{{ site.author.bio }}</div>
+    <div class="sb-links">
+      {% if site.author.github %}<a href="{{ site.author.github }}" target="_blank" rel="noopener">github</a>{% endif %}
+      {% if site.author.linkedin %}<span class="sb-dot">·</span><a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">linkedin</a>{% endif %}
+      {% if site.author.hackthebox %}<span class="sb-dot">·</span><a href="{{ site.author.hackthebox }}" target="_blank" rel="noopener">hackthebox</a>{% endif %}
+      {% if site.author.twitter %}<span class="sb-dot">·</span><a href="{{ site.author.twitter }}" target="_blank" rel="noopener">x</a>{% endif %}
+    </div>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-label">navigation</div>
+    <a href="{{ '/' | relative_url }}"        class="sb-link{% if page.url == '/' %} active{% endif %}">home</a>
+    <a href="{{ '/search/' | relative_url }}"  class="sb-link{% if page.url contains '/search' %} active{% endif %}">search</a>
+    <a href="{{ '/tags/' | relative_url }}"    class="sb-link{% if page.url contains '/tags' %} active{% endif %}">tags</a>
+    <a href="{{ '/about/' | relative_url }}"   class="sb-link{% if page.url contains '/about' %} active{% endif %}">about</a>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-label">categories</div>
+    {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+    <button class="sb-cat active" onclick="filterCat(this,'all')">#all <span class="sb-cat-n">({{ site.posts.size }})</span></button>
+    {% for tag in all_tags %}
+      {% assign tag_posts = site.posts | where_exp: "p", "p.tags contains tag" %}
+      <button class="sb-cat" onclick="filterCat(this,'{{ tag | downcase }}')">#{{ tag }} <span class="sb-cat-n">({{ tag_posts.size }})</span></button>
+    {% endfor %}
+
+  </div>
+</aside>

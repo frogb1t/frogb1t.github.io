@@ -1,0 +1,26 @@
+---
+layout: default
+title: tags
+permalink: /tags/
+---
+
+<div class="page-header">
+  <div class="page-title">tags</div>
+  <div class="page-rule"></div>
+</div>
+
+<div class="prose">
+{% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+{% for tag in all_tags %}
+  <h2 id="{{ tag }}">{{ tag }}</h2>
+  {% assign tag_posts = site.posts | where_exp: "p", "p.tags contains tag" %}
+  <div class="post-list" style="margin-bottom:1.5rem">
+  {% for post in tag_posts %}
+    <article class="post-item">
+      <div class="post-meta">{{ post.date | date: "%d %b %Y" }}</div>
+      <a href="{{ post.url | relative_url }}" class="post-title">{{ post.title }}</a>
+    </article>
+  {% endfor %}
+  </div>
+{% endfor %}
+</div>
