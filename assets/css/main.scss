@@ -335,3 +335,6 @@ body.sb-off .site-main    { padding-left: 3rem; }
 @media (prefers-reduced-motion: reduce) {
   .sidebar, .site-main { transition: none; }
 }
+
+/* TOC h3 indent */
+.toc-h3 { padding-left: 1.4rem; font-size: .68rem; }

@@ -62,16 +62,60 @@ function initSearch() {
   });
 }
 
+// ── TOC — build from h2s, track scroll ───────────
+function buildToc() {
+  var toc      = document.getElementById('article-toc');
+  var prose    = document.getElementById('prose-content');
+  if (!toc || !prose) return;
+
+  var headings = prose.querySelectorAll('h2[id], h3[id]');
+  if (!headings.length) return;
+
+  toc.style.display = '';
+  // Keep label, remove old links
+  var label = toc.querySelector('.toc-label');
+  toc.innerHTML = '';
+  toc.appendChild(label);
+
+  headings.forEach(function(h) {
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.className = 'toc-link' + (h.tagName === 'H3' ? ' toc-h3' : '');
+    a.textContent = h.textContent;
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    toc.appendChild(a);
+  });
+
+  // Scroll spy
+  function updateActive() {
+    var mid = window.scrollY + window.innerHeight * 0.3;
+    var active = headings[0];
+    headings.forEach(function(h) { if (h.offsetTop <= mid) active = h; });
+    toc.querySelectorAll('.toc-link').forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + active.id);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+}
+
 // ── Highlight.js + code headers + copy ───────────
 document.addEventListener('DOMContentLoaded', function() {
-  // Highlight all code blocks
-  document.querySelectorAll('pre code').forEach(function(el) {
-    hljs.highlightElement(el);
-  });
-  // Inject headers with lang label + copy button
+  // Syntax highlight
+  if (typeof hljs !== 'undefined') {
+    document.querySelectorAll('pre code').forEach(function(el) {
+      hljs.highlightElement(el);
+    });
+  }
+  // Code block headers
   injectCodeHeaders();
-  // Init search if on search page
+  // Search page
   initSearch();
+  // TOC on post pages
+  buildToc();
 });
 
 function injectCodeHeaders() {
@@ -107,7 +151,6 @@ function injectCodeHeaders() {
   });
 }
 
-// Copy for manually written codeblocks (demo/preview)
 function copyCode(btn) {
   var block = btn.closest('.codeblock');
   var code  = block.querySelector('code') || block.querySelector('pre');
