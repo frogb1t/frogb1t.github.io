@@ -62,9 +62,15 @@ function initSearch() {
   });
 }
 
-// ── Code headers + copy ───────────────────────────
+// ── Highlight.js + code headers + copy ───────────
 document.addEventListener('DOMContentLoaded', function() {
+  // Highlight all code blocks
+  document.querySelectorAll('pre code').forEach(function(el) {
+    hljs.highlightElement(el);
+  });
+  // Inject headers with lang label + copy button
   injectCodeHeaders();
+  // Init search if on search page
   initSearch();
 });
 
@@ -84,9 +90,8 @@ function injectCodeHeaders() {
     var langEl  = document.createElement('span');  langEl.className = 'code-lang'; langEl.textContent = lang;
     var copyBtn = document.createElement('button'); copyBtn.className = 'code-copy'; copyBtn.textContent = 'copiar';
     copyBtn.addEventListener('click', function() {
-      var pre = block.querySelector('pre');
-      var text = pre ? (pre.innerText || pre.textContent) : '';
-      navigator.clipboard.writeText(text).then(function() {
+      var code = block.querySelector('code') || block.querySelector('pre');
+      navigator.clipboard.writeText(code.innerText || code.textContent).then(function() {
         copyBtn.textContent = 'copiado';
         setTimeout(function() { copyBtn.textContent = 'copiar'; }, 1500);
       }).catch(function() {
@@ -99,5 +104,15 @@ function injectCodeHeaders() {
     block.parentNode.insertBefore(wrap, block);
     wrap.appendChild(header);
     wrap.appendChild(block);
+  });
+}
+
+// Copy for manually written codeblocks (demo/preview)
+function copyCode(btn) {
+  var block = btn.closest('.codeblock');
+  var code  = block.querySelector('code') || block.querySelector('pre');
+  navigator.clipboard.writeText(code.innerText || code.textContent).then(function() {
+    btn.textContent = 'copiado';
+    setTimeout(function() { btn.textContent = 'copiar'; }, 1500);
   });
 }
