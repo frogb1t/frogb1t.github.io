@@ -1,14 +1,14 @@
-title: "seclog"
+title: "Fr0gB1t"
 description: "Security researcher. CTF player. Escribo lo que aprendo."
 
 author:
-  name:       "tuusuario"
+  name:       "Fr0gB1t"
   bio:        "Security researcher. CTF player. Escribo lo que aprendo."
-  avatar:     ""          # opcional: "/assets/img/avatar.jpg"
-  github:     "https://github.com/tuusuario"
-  twitter:    "https://twitter.com/tuusuario"
-  hackthebox: "https://app.hackthebox.com/users/tuusuario"
-  linkedin:   "https://linkedin.com/in/tuusuario"
+  avatar:     "/assets/images/avatar.jpg"          # opcional: "/assets/img/avatar.jpg"
+  github:     "https://github.com/frogb1t"
+  #twitter:    "https://twitter.com/tuusuario"
+  #hackthebox: "https://app.hackthebox.com/users/tuusuario"
+  #linkedin:   "https://linkedin.com/in/tuusuario"
 
 url:     "https://tuusuario.github.io"   # cambia esto
 baseurl: ""                               # deja vacío para user pages (usuario.github.io)
