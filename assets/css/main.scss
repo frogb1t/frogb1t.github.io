@@ -315,6 +315,42 @@ body.sb-off .site-main   { padding-left: 3rem; }
 .highlight .n,  .highlight .na, .highlight .ni  { color: #adbac7; }
 .highlight .p                                    { color: #89ddff; }
 
+/* ── OVERFLOW CONTAINMENT ── */
+
+/* Images never exceed their column */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+}
+
+/* Code blocks scroll horizontally inside, never push layout */
+.prose pre,
+.highlight,
+.code-wrap,
+.codeblock {
+  max-width: 100%;
+  overflow-x: auto;
+  word-break: normal;
+  white-space: pre;
+}
+
+/* Tables scroll horizontally on overflow */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Long unbreakable strings (URLs, hashes) wrap */
+.prose p,
+.prose li,
+.prose blockquote {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* back link */
 .back-link {
   display: inline-block; font-family: var(--mono); font-size: .78rem;
