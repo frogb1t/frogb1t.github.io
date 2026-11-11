@@ -12,7 +12,7 @@ permalink: /tags/
 <div class="prose">
 {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
 {% for tag in all_tags %}
-  <h2 id="{{ tag }}">{{ tag }}</h2>
+  <h2 id="{{ tag }}">#{{ tag }}</h2>
   {% assign tag_posts = site.posts | where_exp: "p", "p.tags contains tag" %}
   <div class="post-list" style="margin-bottom:1.5rem">
   {% for post in tag_posts %}
