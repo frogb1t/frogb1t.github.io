@@ -140,24 +140,26 @@ body.sb-off .site-main   { padding-left: 3rem; }
   transition: padding-left .22s ease;
 }
 
-/* ── INDEX / LIST pages — guchi style: date + title on one line ── */
-.post-list { list-style: none; padding: 0; }
-.post-item {
-  margin-bottom: .4rem;
-  display: flex; align-items: baseline; gap: 1.2rem;
-}
-.post-item .post-meta {
-  font-family: var(--mono); font-size: .82rem;
-  color: #555; white-space: nowrap; flex-shrink: 0;
-}
+/* ── INDEX / LIST pages ── */
+.post-list { display: flex; flex-direction: column; max-width: 680px; }
+.post-item { padding: 2rem 0; border-bottom: 1px solid #161616; }
+.post-item:first-child { padding-top: 0; }
+.post-item .post-meta { font-size: .75rem; color: var(--text-low); margin-bottom: .4rem; }
 .post-title {
-  font-family: var(--mono); font-size: .93rem;
-  color: #d4d4d4; text-decoration: none; transition: color .15s;
+  font-family: var(--sans); font-size: 1.1rem; font-weight: 600;
+  color: #dcdcdc; text-decoration: none; display: block;
+  margin-bottom: .5rem; line-height: 1.35;
+  transition: color .15s; letter-spacing: -.01em;
 }
 .post-title:hover { color: #fff; }
-.post-excerpt { display: none; }
-.post-tags    { display: none; }
-.no-results { font-family: var(--mono); font-size: .85rem; color: #555; padding: 1rem 0; display: none; }
+.post-excerpt { font-size: .88rem; color: var(--text-dim); line-height: 1.75; margin-bottom: .65rem; }
+.post-tags { display: flex; gap: .3rem; flex-wrap: wrap; }
+.post-tag {
+  font-family: var(--mono); font-size: .65rem; color: var(--text-low);
+  border: 1px solid var(--border-c); padding: .12rem .4rem; border-radius: 2px;
+  text-decoration: none;
+}
+.no-results { font-size: .82rem; color: #282828; padding: 1.5rem 0; display: none; }
 
 /* page header */
 .page-header { margin-bottom: 2rem; }
