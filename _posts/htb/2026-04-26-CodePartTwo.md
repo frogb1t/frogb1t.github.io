@@ -6,7 +6,7 @@ tags: [linux, easy, code review, npbackup, rce]
 excerpt: "hackthebox"
 ---
 
-# Enumeration
+## Enumeration
 
 Vamos a empezar con un escaneo `nmap` :
 
@@ -166,9 +166,9 @@ No hay nada. Vamos a crear una cuenta en la aplicación:
 
 Vemos que podemos ejecutar código JavaScript desde el navegador. Vamos a ver como funciona la web por atrás:
 
-## Source Analysis
+### Source Analysis
 
-### app.py
+#### app.py
 
 ```python
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
@@ -283,7 +283,7 @@ Encontramos una key:
 S3cr3tK3yC0d3PartTw0
 ```
 
-# Shell as app
+## Shell as app
 
 Leyendo el código me interesé en buscar que hacia con el input del code block de la web:
 
@@ -391,7 +391,7 @@ bash: no job control in this shell
 app@codeparttwo:~/app$ 
 ```
 
-# Shell as marco
+## Shell as marco
 
 Si hacemos un `ls` podremos ver que estamos en la misma `app` :
 
@@ -459,7 +459,7 @@ Last login: Wed Sep 17 17:39:11 2025 from 10.10.14.209
 marco@codeparttwo:~$ 
 ```
 
-# Shell as root
+## Shell as root
 
 Si vemos nuestro directorio `home` :
 

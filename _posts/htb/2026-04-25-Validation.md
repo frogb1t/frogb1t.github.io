@@ -6,7 +6,7 @@ tags: [linux, easy, sqli union based, sql, second order]
 excerpt: "hackthebox"
 ---
 
-# Enumeration
+## Enumeration
 
 Vamos a empezar con un escaneo `nmap`:
 
@@ -70,7 +70,7 @@ Nmap done: 1 IP address (1 host up) scanned in 13.67 seconds
 | `4566/TCP` | Nginx               |
 | `8080/TCP` | Nginx               |
 
-## Website - TCP 80
+### Website - TCP 80
 
 Vamos a visitar la aplicación web:
 
@@ -110,7 +110,7 @@ Vemos un error, donde nos esta comentando un error con la función `fetch_assoc(
 
 Vemos que estamos ocasionando un fallo en la base de datos. Vamos a probar un `UNION based`.
 
-# SQL Injection Union Based
+## SQL Injection Union Based
 Vamos a intentar enumerar el número de columnas existentes en la tabla en uso:
 
 - Payload:
@@ -145,7 +145,7 @@ Vamos a probar con `2`:
 
 Vale, la tabla que se esta empleando solo tiene 1 columna. Así que a futuro si queremos reflejar varios valores podemos usar `group_concat` o `concat` para concatenar resultados.
 
-# Shell as www-data
+## Shell as www-data
 
 Sabiendo que nuestro input se refleja vamos a intentar leer un archivo interno del sistema:
 
@@ -362,7 +362,7 @@ bash: no job control in this shell
 www-data@validation:/$ 
 ```
 
-# Shell as root
+## Shell as root
 
 Vamos a probar las credenciales obtenidas anteriormente para ver si hay reutilización de ellas:
 ```bash
