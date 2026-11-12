@@ -107,7 +107,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Syntax highlight
   if (typeof hljs !== 'undefined') {
     document.querySelectorAll('pre code').forEach(function(el) {
-      hljs.highlightElement(el);
+        if (el.closest('.language-mermaid') ||
+            el.classList.contains('language-mermaid')) {
+            return;
+        }
+      
+        hljs.highlightElement(el);
     });
   }
   // Code block headers
