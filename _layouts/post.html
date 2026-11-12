@@ -36,14 +36,32 @@ layout: default
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
+
   mermaid.initialize({
-    startOnLoad: false,
-    theme: 'dark',
-    securityLevel: 'strict',
-    flowchart: {
-      useMaxWidth: true
-    }
+      startOnLoad: false,
+      theme: 'base',
+      securityLevel: 'strict',
+  
+      themeVariables: {
+          darkMode: true,
+          background: '#0c0c0c',
+          primaryColor: '#111111',
+          primaryTextColor: '#d4d4d4',
+          primaryBorderColor: '#444444',
+          lineColor: '#666666',
+          secondaryColor: '#141414',
+          tertiaryColor: '#0a0a0a',
+          fontFamily: 'Cascadia Code, Fira Code, Consolas, monospace',
+          fontSize: '12px'
+      },
+    
+      flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          curve: 'linear'
+      }
   });
+
 
   document.addEventListener('DOMContentLoaded', async () => {
     // Transform Rouge/Kramdown blocks into Mermaid containers
