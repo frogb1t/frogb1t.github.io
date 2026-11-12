@@ -338,6 +338,123 @@ code {
 }
 .back-link:hover { color: #fff; }
 
+.prose .mermaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 100%;
+    margin: 1.8rem 0;
+    padding: 1.5rem;
+
+    background: #0c0c0c;
+    border: 1px solid #1c1c1c;
+    border-radius: 3px;
+
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+}
+
+.prose .mermaid svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    font-family: var(--mono);
+}
+
+/* Nodes */
+.prose .mermaid .node rect,
+.prose .mermaid .node circle,
+.prose .mermaid .node ellipse,
+.prose .mermaid .node polygon,
+.prose .mermaid .node path {
+    fill: #111 !important;
+    stroke: #444 !important;
+    stroke-width: 1px !important;
+}
+
+/* Node labels */
+.prose .mermaid .nodeLabel,
+.prose .mermaid .label,
+.prose .mermaid .node .label {
+    color: #d4d4d4 !important;
+    fill: #d4d4d4 !important;
+    font-family: var(--mono) !important;
+    font-size: 12px !important;
+}
+
+/* Edges */
+.prose .mermaid .edgePath path {
+    stroke: #666 !important;
+    stroke-width: 1.2px !important;
+}
+
+/* Arrows */
+.prose .mermaid marker path {
+    fill: #777 !important;
+    stroke: #777 !important;
+}
+
+/* Edge labels */
+.prose .mermaid .edgeLabel {
+    background-color: #0c0c0c !important;
+    color: #888 !important;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+}
+
+.prose .mermaid .edgeLabel rect {
+    fill: #0c0c0c !important;
+    opacity: 1 !important;
+}
+
+/* Subgraphs */
+.prose .mermaid .cluster rect {
+    fill: #0a0a0a !important;
+    stroke: #292929 !important;
+    stroke-width: 1px !important;
+    rx: 3px;
+}
+
+.prose .mermaid .cluster-label {
+    color: #777 !important;
+    fill: #777 !important;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+}
+
+/* Decision nodes */
+.prose .mermaid .node polygon {
+    fill: #141414 !important;
+    stroke: #555 !important;
+}
+
+/* Text */
+.prose .mermaid text {
+    fill: #c0c0c0 !important;
+    font-family: var(--mono) !important;
+}
+
+/* Hover */
+.prose .mermaid .node:hover rect,
+.prose .mermaid .node:hover polygon {
+    stroke: #aaa !important;
+    transition: stroke .15s ease;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .prose .mermaid {
+        justify-content: flex-start;
+        padding: 1rem .5rem;
+    }
+
+    .prose .mermaid svg {
+        max-width: none;
+    }
+}
+
 /* responsive */
 @media (max-width: 640px) {
   .site-main { padding: 1.5rem 1rem 3rem; }
