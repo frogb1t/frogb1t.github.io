@@ -104,66 +104,91 @@ async function translateText(text, targetLang) {
   return result;
 }
 
-// ── Translate all translatable nodes in the page ──────────────────────────────
-// Collects text nodes, batches them into one API call, applies results.
+// ── Walk a container and collect translatable text nodes ──────────────────────
+// Skips: <code>, <pre>, <script>, <style>, and elements with data-no-translate.
+// Returns array of { node: TextNode, original: string }
+function collectTextNodes(root) {
+  var results = [];
+  var SKIP = { CODE: 1, PRE: 1, SCRIPT: 1, STYLE: 1, KBD: 1, VAR: 1, SAMP: 1 };
+
+  function walk(node) {
+    if (node.nodeType === 3) { // TEXT_NODE
+      var txt = node.nodeValue.trim();
+      if (txt.length > 1) results.push({ node: node, original: node.nodeValue });
+      return;
+    }
+    if (node.nodeType !== 1) return; // not ELEMENT_NODE
+    if (SKIP[node.tagName]) return;
+    if (node.hasAttribute && node.hasAttribute('data-no-translate')) return;
+    // Skip code-wrap headers (lang label + copy button)
+    if (node.classList && (node.classList.contains('code-header') || node.classList.contains('code-lang'))) return;
+    for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i]);
+  }
+
+  walk(root);
+  return results;
+}
+
+// ── Translate all translatable content on the page ───────────────────────────
 async function translatePage(targetLang) {
-  // Collect nodes to translate
-  // Each entry: { el, type: 'text'|'html'|'placeholder', original }
-  var nodes = [];
+  var jobs = []; // { nodes: [TextNode…], text: string }
 
-  // Post content (prose) — translate as one HTML chunk
-  var prose = document.getElementById('prose-content');
-  if (prose) {
-    nodes.push({ el: prose, type: 'html', original: prose.innerHTML });
+  // Helper: collect text nodes from a container and queue a translation job
+  function queueContainer(container) {
+    if (!container) return;
+    var textNodes = collectTextNodes(container);
+    if (!textNodes.length) return;
+    // Group consecutive text nodes under the same parent into one string
+    // to minimise API calls while keeping granularity
+    var grouped = {};
+    textNodes.forEach(function(item) {
+      var key = item.node.parentNode ? item.node.parentNode.__i18n_id : null;
+      if (!key) {
+        key = 'g' + jobs.length + '_' + Math.random().toString(36).slice(2);
+        if (item.node.parentNode) item.node.parentNode.__i18n_id = key;
+      }
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(item);
+    });
+    Object.values(grouped).forEach(function(items) {
+      jobs.push(items);
+    });
   }
 
-  // Post title h1
+  // Post prose content
+  queueContainer(document.getElementById('prose-content'));
+
+  // Post h1 title
   var h1 = document.querySelector('.article-body h1');
-  if (h1) nodes.push({ el: h1, type: 'text', original: h1.textContent });
+  if (h1) queueContainer(h1);
 
-  // Post list excerpts on index page
-  document.querySelectorAll('.post-excerpt').forEach(function(el) {
-    nodes.push({ el: el, type: 'text', original: el.textContent });
-  });
+  // Index page: post titles + excerpts
+  document.querySelectorAll('.post-list .post-title, .post-excerpt').forEach(queueContainer);
 
-  // Post titles on index page (links)
-  document.querySelectorAll('.post-list .post-title').forEach(function(el) {
-    nodes.push({ el: el, type: 'text', original: el.textContent });
-  });
-
-  // About / static page prose
+  // Static pages (about)
   var staticProse = document.querySelector('.prose:not(#prose-content)');
-  if (staticProse) {
-    nodes.push({ el: staticProse, type: 'html', original: staticProse.innerHTML });
-  }
+  if (staticProse) queueContainer(staticProse);
 
-  if (nodes.length === 0) return;
+  if (!jobs.length) return;
 
-  // Show translating indicator
   setTranslatingState(true);
 
   try {
-    // Translate each node (parallelise — they're independent)
-    await Promise.all(nodes.map(async function(node) {
-      var translated;
-      if (node.type === 'html') {
-        // Extract only text from html, translate, then reinsert
-        // We translate the innerHTML but tell Claude to keep HTML tags intact
-        translated = await translateText(node.original, targetLang);
-        node.el.innerHTML = translated;
-        // Re-run highlight.js on any code blocks inside
-        if (typeof hljs !== 'undefined') {
-          node.el.querySelectorAll('pre code').forEach(function(c) {
-            if (!c.classList.contains('language-mermaid')) hljs.highlightElement(c);
-          });
-        }
-        // Re-inject code headers
-        injectCodeHeaders();
-      } else {
-        translated = await translateText(node.original, targetLang);
-        node.el.textContent = translated;
-      }
+    // Translate all jobs in parallel
+    await Promise.all(jobs.map(async function(items) {
+      // Join all text values with a separator the model can't confuse with real text
+      var SEP = '\n||||\n';
+      var combined = items.map(function(i) { return i.original; }).join(SEP);
+      var translated = await translateText(combined, targetLang);
+      var parts = translated.split(SEP);
+      items.forEach(function(item, idx) {
+        item.node.nodeValue = (parts[idx] !== undefined) ? parts[idx] : item.original;
+      });
     }));
+
+    // Rebuild TOC headings (text changed)
+    buildToc();
+
   } catch(err) {
     console.error('Translation error:', err);
     setTranslatingState(false, true);
