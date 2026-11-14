@@ -4,7 +4,7 @@ description: "Security researcher. CTF player. Escribo lo que aprendo."
 # ─── LANGUAGE ──────────────────────────────────────────────────────────────────
 # Set to "es" or "en". This controls what language the UI renders in.
 # Your posts can be written in EITHER language — the UI chrome will adapt.
-lang: "en"
+lang: "es"
 
 author:
   name:       "Fr0gB1t"
