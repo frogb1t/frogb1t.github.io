@@ -512,6 +512,22 @@ body.sb-off .sb-footer { display: none; }
 
 .lang-btn:hover { color: #888; }
 
+/* Pulsing opacity while API translates */
+.lang-switcher.translating .lang-btn { opacity: .4; pointer-events: none; }
+.lang-switcher.translating::after {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  margin-left: .5rem;
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: .2; }
+  50%       { opacity: .8; }
+}
+
 /* bilingual post subtitle */
 .post-title-alt {
   font-size: .8rem;
