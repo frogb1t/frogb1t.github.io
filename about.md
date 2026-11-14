@@ -1,11 +1,11 @@
 ---
 layout: default
-title: acerca
+title: about
 permalink: /about/
 ---
 
 <div class="page-header">
-  <div class="page-title">acerca</div>
+  <div class="page-title">about</div>
   <div class="page-rule"></div>
 </div>
 
