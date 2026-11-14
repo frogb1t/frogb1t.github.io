@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<a href="{{ '/' | relative_url }}" class="back-link">{% include t.html k="back_link" %}</a>
+<a href="{{ '/' | relative_url }}" class="back-link">← inicio</a>
 
 <div class="article-layout">
 
@@ -9,21 +9,9 @@ layout: default
   <div class="article-body">
     <header class="post-header">
       <div class="post-meta">
-        {{ page.date | date: "%d %b %Y" }}{% if page.reading_time %} · {{ page.reading_time }} <span data-i18n="min_read">{% include t.html k="min_read" %}</span>{% endif %}
+        {{ page.date | date: "%d %b %Y" }}{% if page.reading_time %} · {{ page.reading_time }} min lectura{% endif %}
       </div>
       <h1>{{ page.title }}</h1>
-
-      {% comment %}
-        Bilingual title support: add `title_en` or `title_es` in front matter
-        to show a translated subtitle. The post's main `title` is the one you wrote.
-      {% endcomment %}
-      {% assign _lang = site.lang | default: "es" %}
-      {% if _lang == "es" and page.title_en %}
-        <div class="post-title-alt" data-i18n-alt>{{ page.title_en }}</div>
-      {% elsif _lang == "en" and page.title_es %}
-        <div class="post-title-alt" data-i18n-alt>{{ page.title_es }}</div>
-      {% endif %}
-
       {% if page.tags.size > 0 %}
       <div class="post-tags">
         {% for tag in page.tags %}
@@ -40,7 +28,7 @@ layout: default
 
   <!-- TOC — RIGHT (built dynamically by JS) -->
   <nav class="article-toc" id="article-toc" style="display:none">
-    <div class="toc-label" data-i18n="toc_label">{% include t.html k="toc_label" %}</div>
+    <div class="toc-label">contenido</div>
   </nav>
 
 </div>
@@ -48,10 +36,12 @@ layout: default
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
+
   mermaid.initialize({
       startOnLoad: false,
       theme: 'base',
       securityLevel: 'strict',
+  
       themeVariables: {
           darkMode: true,
           background: '#0c0c0c',
@@ -64,6 +54,7 @@ layout: default
           fontFamily: 'Cascadia Code, Fira Code, Consolas, monospace',
           fontSize: '12px'
       },
+    
       flowchart: {
           useMaxWidth: true,
           htmlLabels: true,
@@ -71,16 +62,25 @@ layout: default
       }
   });
 
+
   document.addEventListener('DOMContentLoaded', async () => {
+    // Transform Rouge/Kramdown blocks into Mermaid containers
     document.querySelectorAll(
       '.language-mermaid pre code, pre code.language-mermaid'
     ).forEach(code => {
-      const wrapper = code.closest('div.language-mermaid') || code.closest('pre');
+      const wrapper = code.closest('div.language-mermaid')
+        || code.closest('pre');
+
       const diagram = document.createElement('div');
       diagram.className = 'mermaid';
       diagram.textContent = code.textContent;
+
       wrapper.replaceWith(diagram);
     });
-    await mermaid.run({ querySelector: '.mermaid' });
+
+    // Render diagrams
+    await mermaid.run({
+      querySelector: '.mermaid'
+    });
   });
 </script>

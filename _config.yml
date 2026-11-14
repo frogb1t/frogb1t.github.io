@@ -1,23 +1,17 @@
 title: "Fr0gB1t"
 description: "Security researcher. CTF player. Escribo lo que aprendo."
 
-# ─── LANGUAGE ──────────────────────────────────────────────────────────────────
-# Set to "es" or "en". This controls what language the UI renders in.
-# Your posts can be written in EITHER language — the UI chrome will adapt.
-lang: "es"
-
 author:
   name:       "Fr0gB1t"
-  bio_es:     "Security researcher. CTF player. Escribo lo que aprendo."
-  bio_en:     "Security researcher. CTF player. I write about what I learn."
-  avatar:     "/assets/images/avatar.png"
+  bio:        "Security researcher. CTF player. Escribo lo que aprendo."
+  avatar:     "/assets/images/avatar.png"          # opcional: "/assets/img/avatar.jpg"
   github:     "https://github.com/frogb1t"
   #twitter:    "https://twitter.com/tuusuario"
   #hackthebox: "https://app.hackthebox.com/users/tuusuario"
   #linkedin:   "https://linkedin.com/in/tuusuario"
 
-url:     "https://frogb1t.github.io"
-baseurl: ""
+url:     "https://tuusuario.github.io"   # cambia esto
+baseurl: ""                               # deja vacío para user pages (usuario.github.io)
 
 permalink: /:year/:month/:day/:title/
 
