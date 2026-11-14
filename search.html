@@ -1,6 +1,7 @@
 ---
 layout: default
-title: búsqueda
+title_en: "search"
+title_es: "búsqueda"
 permalink: /search/
 ---
 
@@ -20,7 +21,7 @@ window.POSTS = [
 </script>
 
 <div class="page-header">
-  <div class="page-title">búsqueda</div>
+  <div class="page-title" data-i18n="page_search">{% include t.html k="page_search" %}</div>
   <div class="page-rule"></div>
 </div>
 
@@ -29,9 +30,11 @@ window.POSTS = [
     <circle cx="5" cy="5" r="3.5" stroke="#666" stroke-width="1.2"/>
     <line x1="8" y1="8" x2="11" y2="11" stroke="#666" stroke-width="1.2"/>
   </svg>
-  <input id="search-input" type="text" placeholder="buscar por título, tag o contenido…" autocomplete="off">
+  <input id="search-input" type="text"
+    placeholder="{% include t.html k="search_placeholder" %}"
+    autocomplete="off">
 </div>
 
 <div class="post-list" id="search-results"></div>
-<p class="no-results" id="search-no-results">No hay resultados.</p>
-<p class="search-hint"  id="search-hint">Escribe algo para buscar entre los artículos.</p>
+<p class="no-results" id="search-no-results" data-i18n="no_results">{% include t.html k="no_results" %}</p>
+<p class="search-hint"  id="search-hint"  data-i18n="search_hint">{% include t.html k="search_hint" %}</p>

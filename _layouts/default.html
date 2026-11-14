@@ -1,14 +1,22 @@
+---
+---
+{% assign _lang = site.lang | default: "es" %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ _lang }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title and page.title != 'inicio' %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.title and page.title != 'inicio' and page.title != 'home' %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 155 }}{% else %}{{ site.description }}{% endif %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/dark.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   {% seo %}
   {% feed_meta %}
+  <script>
+    // Expose Jekyll-rendered lang so JS can read it
+    window.SITE_LANG = "{{ _lang }}";
+    window.SITE_BASEURL = "{{ site.baseurl }}";
+  </script>
 </head>
 <body>
 

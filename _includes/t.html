@@ -1,0 +1,14 @@
+{% comment %}
+  Usage: {% include t.html k="nav_home" %}
+  Reads site.lang (default "es"), looks up _data/i18n.yml[lang][k].
+  Falls back to the other language if key missing.
+{% endcomment %}
+{% assign _lang = site.lang | default: "es" %}
+{% assign _key  = include.k %}
+{% assign _val  = site.data.i18n[_lang][_key] %}
+{% if _val == nil or _val == "" %}
+  {% assign _fallback = "es" %}
+  {% if _lang == "es" %}{% assign _fallback = "en" %}{% endif %}
+  {% assign _val = site.data.i18n[_fallback][_key] %}
+{% endif %}
+{{ _val }}

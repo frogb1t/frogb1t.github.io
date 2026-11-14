@@ -1,6 +1,7 @@
 ---
 layout: default
-title: inicio
+title_en: "home"
+title_es: "inicio"
 ---
 
 <div class="post-list" id="post-list">
@@ -24,4 +25,4 @@ title: inicio
   </article>
   {% endfor %}
 </div>
-<p class="no-results" id="no-results">No hay resultados.</p>
+<p class="no-results" id="no-results" data-i18n="no_results">{% include t.html k="no_results" %}</p>

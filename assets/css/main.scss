@@ -463,3 +463,36 @@ code {
 @media (prefers-reduced-motion: reduce) {
   .sidebar, .site-main { transition: none; }
 }
+
+/* ═══════════════════════════════════
+   LANG TOGGLE
+═══════════════════════════════════ */
+
+.lang-toggle {
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: .15rem .45rem;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+  margin-right: auto;
+}
+.lang-toggle:hover {
+  color: var(--white);
+  border-color: #444;
+}
+
+/* bilingual post subtitle */
+.post-title-alt {
+  font-size: .8rem;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  margin-top: .2rem;
+  margin-bottom: .6rem;
+}

@@ -3,6 +3,9 @@
 
 <aside class="sidebar">
   <div class="sb-topbar">
+    <button class="lang-toggle" id="lang-toggle" title="Switch language" onclick="toggleLang()">
+      {% include t.html k="lang_toggle" %}
+    </button>
     <button class="sb-toggle" onclick="toggleSidebar()">&lt;&lt;</button>
   </div>
 
@@ -20,7 +23,14 @@
     </div>
 
     <div class="sb-name">{{ site.author.name }}</div>
-    <div class="sb-bio">{{ site.author.bio }}</div>
+    {% assign _lang = site.lang | default: "es" %}
+    {% if _lang == "en" and site.author.bio_en %}
+      <div class="sb-bio" data-i18n="bio">{{ site.author.bio_en }}</div>
+    {% elsif site.author.bio_es %}
+      <div class="sb-bio" data-i18n="bio">{{ site.author.bio_es }}</div>
+    {% else %}
+      <div class="sb-bio" data-i18n="bio">{{ site.author.bio }}</div>
+    {% endif %}
     <div class="sb-links">
       {% if site.author.github %}<a href="{{ site.author.github }}" target="_blank" rel="noopener">github</a>{% endif %}
       {% if site.author.linkedin %}<span class="sb-dot">·</span><a href="{{ site.author.linkedin }}" target="_blank" rel="noopener">linkedin</a>{% endif %}
@@ -30,20 +40,22 @@
 
     <div class="sb-rule"></div>
 
-    <div class="sb-label">navigation</div>
-    <a href="{{ '/' | relative_url }}"        class="sb-link{% if page.url == '/' %} active{% endif %}">home</a>
-    <a href="{{ '/search/' | relative_url }}"  class="sb-link{% if page.url contains '/search' %} active{% endif %}">search</a>
-    <a href="{{ '/tags/' | relative_url }}"    class="sb-link{% if page.url contains '/tags' %} active{% endif %}">tags</a>
-    <a href="{{ '/about/' | relative_url }}"   class="sb-link{% if page.url contains '/about' %} active{% endif %}">about</a>
+    <div class="sb-label" data-i18n="navigation">navigation</div>
+    <a href="{{ '/' | relative_url }}"        class="sb-link{% if page.url == '/' %} active{% endif %}" data-i18n="nav_home">{% include t.html k="nav_home" %}</a>
+    <a href="{{ '/search/' | relative_url }}"  class="sb-link{% if page.url contains '/search' %} active{% endif %}" data-i18n="nav_search">{% include t.html k="nav_search" %}</a>
+    <a href="{{ '/tags/' | relative_url }}"    class="sb-link{% if page.url contains '/tags' %} active{% endif %}" data-i18n="nav_tags">{% include t.html k="nav_tags" %}</a>
+    <a href="{{ '/about/' | relative_url }}"   class="sb-link{% if page.url contains '/about' %} active{% endif %}" data-i18n="nav_about">{% include t.html k="nav_about" %}</a>
 
     <div class="sb-rule"></div>
 
-    <div class="sb-label">categories</div>
+    <div class="sb-label" data-i18n="categories">{% include t.html k="nav_categories" %}</div>
     {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
-    <button class="sb-cat active" onclick="filterCat(this,'all')">#all <span class="sb-cat-n">({{ site.posts.size }})</span></button>
+    <button class="sb-cat active" onclick="filterCat(this,'all')" data-i18n-prefix="#" data-i18n="all_tag">#<span data-i18n="all_tag">{% include t.html k="all_tag" %}</span> <span class="sb-cat-n">({{ site.posts.size }})</span></button>
     {% for tag in all_tags %}
       {% assign tag_posts = site.posts | where_exp: "p", "p.tags contains tag" %}
-      <button class="sb-cat" onclick="filterCat(this,'{{ tag | downcase }}')">#{{ tag }} <span class="sb-cat-n">({{ tag_posts.size }})</span></button>
+      <button class="sb-cat" onclick="filterCat(this,'{{ tag | downcase }}')">
+        #{{ tag }} <span class="sb-cat-n">({{ tag_posts.size }})</span>
+      </button>
     {% endfor %}
 
   </div>
