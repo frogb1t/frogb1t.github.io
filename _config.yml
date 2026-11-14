@@ -4,7 +4,7 @@ description: "Security researcher. CTF player. Escribo lo que aprendo."
 author:
   name:       "Fr0gB1t"
   bio:        "Security researcher. CTF player. Escribo lo que aprendo."
-  avatar:     "/assets/images/avatar.jpeg"          # opcional: "/assets/img/avatar.jpg"
+  avatar:     "/assets/images/avatar.png"          # opcional: "/assets/img/avatar.jpg"
   github:     "https://github.com/frogb1t"
   #twitter:    "https://twitter.com/tuusuario"
   #hackthebox: "https://app.hackthebox.com/users/tuusuario"
