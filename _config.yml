@@ -10,7 +10,7 @@ author:
   #hackthebox: "https://app.hackthebox.com/users/tuusuario"
   #linkedin:   "https://linkedin.com/in/tuusuario"
 
-url:     "https://tuusuario.github.io"   # cambia esto
+url:     "https://frogb1t.github.io"   # cambia esto
 baseurl: ""                               # deja vacío para user pages (usuario.github.io)
 
 permalink: /:year/:month/:day/:title/
