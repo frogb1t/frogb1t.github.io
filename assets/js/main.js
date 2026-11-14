@@ -278,6 +278,11 @@ document.addEventListener('DOMContentLoaded', function() {
   injectCodeHeaders();
   initSearch();
   buildToc();
-  // Apply JS-side lang override if user preference differs from Jekyll default
+
+  // Bind lang toggle button (avoids inline onclick firing before script loads)
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', toggleLang);
+
+  // Apply JS-side lang override if user has a stored preference
   applyTranslations();
 });

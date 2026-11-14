@@ -465,8 +465,18 @@ code {
 }
 
 /* ═══════════════════════════════════
-   LANG TOGGLE
+   LANG TOGGLE + SIDEBAR FOOTER
 ═══════════════════════════════════ */
+
+.sb-footer {
+  flex-shrink: 0;
+  width: var(--side-w);
+  padding: .8rem 1.4rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+body.sb-off .sb-footer { display: none; }
 
 .lang-toggle {
   font-family: var(--mono);
@@ -478,10 +488,9 @@ code {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 3px;
-  padding: .15rem .45rem;
+  padding: .2rem .5rem;
   cursor: pointer;
   transition: color .15s, border-color .15s;
-  margin-right: auto;
 }
 .lang-toggle:hover {
   color: var(--white);

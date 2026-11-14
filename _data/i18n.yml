@@ -1,4 +1,5 @@
 en:
+  nav_navigation:  "navigation"
   nav_home:        "home"
   nav_search:      "search"
   nav_tags:        "tags"
@@ -19,6 +20,7 @@ en:
   lang_toggle:     "es"
 
 es:
+  nav_navigation:  "navigation"
   nav_home:        "inicio"
   nav_search:      "búsqueda"
   nav_tags:        "tags"
