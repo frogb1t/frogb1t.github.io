@@ -38,7 +38,7 @@
 
     <div class="sb-rule"></div>
 
-    <div class="sb-label">categories</div>
+    <!--<div class="sb-label">categories</div>
     {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
     <button class="sb-cat active" onclick="filterCat(this,'all')">#all <span class="sb-cat-n">({{ site.posts.size }})</span></button>
     {% for tag in all_tags %}
@@ -46,5 +46,5 @@
       <button class="sb-cat" onclick="filterCat(this,'{{ tag | downcase }}')">#{{ tag }} <span class="sb-cat-n">({{ tag_posts.size }})</span></button>
     {% endfor %}
 
-  </div>
+  </div>-->
 </aside>
