@@ -2,7 +2,7 @@
 layout: post
 title: "Validation - HTB"
 date: 2026-04-25
-tags: [linux, easy, sqli union based, sql, second order]
+tags: [linux, easy, sqli-union-based, sql, second-order]
 excerpt: "hackthebox"
 ---
 

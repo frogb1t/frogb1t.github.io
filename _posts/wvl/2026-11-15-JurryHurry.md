@@ -2,7 +2,7 @@
 layout: post
 title: "JurryHurry - WVL"
 date: 2026-11-15
-tags: ["blind xss",ato,"sesion hijacking"]
+tags: ["blind-xss",ato,"sesion-hijacking"]
 excerpt: "webverselabs"
 ---
 

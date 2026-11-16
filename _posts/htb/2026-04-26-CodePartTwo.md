@@ -2,7 +2,7 @@
 layout: post
 title: "CodePartTwo - HTB"
 date: 2026-04-26
-tags: [linux, easy, code review, npbackup, rce]
+tags: [linux, easy, code-review, npbackup, rce]
 excerpt: "hackthebox"
 ---
 
