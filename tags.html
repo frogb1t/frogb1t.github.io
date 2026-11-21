@@ -10,10 +10,11 @@ permalink: /tags/
 </div>
 
 <div class="prose">
-{% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+{% assign visible_posts = site.posts | where_exp: "p", "p.hidden != true" %}
+{% assign all_tags = visible_posts | map: "tags" | join: "," | split: "," | uniq | sort %}
 {% for tag in all_tags %}
   <h2 id="{{ tag }}">#{{ tag }}</h2>
-  {% assign tag_posts = site.posts | where_exp: "p", "p.tags contains tag" %}
+  {% assign tag_posts = visible_posts | where_exp: "p", "p.tags contains tag" %}
   <div class="post-list" style="margin-bottom:1.5rem">
   {% for post in tag_posts %}
     <article class="post-item">

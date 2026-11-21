@@ -5,6 +5,7 @@ title: inicio
 
 <div class="post-list" id="post-list">
   {% for post in site.posts %}
+  {% if post.hidden != true %}
   <article class="post-item"
     data-tags="{{ post.tags | join: ' ' | downcase }}"
     data-title="{{ post.title | downcase | xml_escape }}"
@@ -22,6 +23,7 @@ title: inicio
     {% endif %}
 
   </article>
+  {% endif %}
   {% endfor %}
 </div>
 <p class="no-results" id="no-results">No hay resultados.</p>
