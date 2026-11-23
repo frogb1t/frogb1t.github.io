@@ -58,7 +58,9 @@ body.sb-off .sidebar { width: 0; border-right: none; }
   justify-content: flex-end;
   padding: .9rem 1.1rem .5rem;
 }
+/* Toggle buttons: hidden on desktop, only shown on mobile */
 .sb-toggle {
+  display: none;
   background: none; border: none; cursor: pointer;
   font-family: var(--mono); font-size: .82rem; font-weight: 700;
   color: #fff; letter-spacing: .02em; padding: 0; line-height: 1;
@@ -80,8 +82,14 @@ body.sb-off .sidebar { width: 0; border-right: none; }
   flex-direction: column; align-items: center; justify-content: flex-start;
 }
 .sb-open-btn:hover { opacity: .5; }
-body.sb-off .sb-open-btn { display: flex; }
+
+/* On desktop, sidebar is always visible — no toggle, no open-btn */
 body.sb-off .site-main   { padding-left: 3rem; }
+
+@media (max-width: 640px) {
+  .sb-toggle { display: block; }
+  body.sb-off .sb-open-btn { display: flex; }
+}
 
 .sidebar-scroll {
   width: var(--side-w); flex: 1;

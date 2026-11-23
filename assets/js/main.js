@@ -1,13 +1,28 @@
 /* seclog — main.js */
 
 // ── Sidebar ───────────────────────────────────────
+function isMobile() {
+  return window.innerWidth <= 640;
+}
 function toggleSidebar() {
+  if (!isMobile()) return;
   var off = document.body.classList.toggle('sb-off');
   try { localStorage.setItem('sb', off ? '0' : '1'); } catch(e) {}
 }
 (function() {
-  try { if (localStorage.getItem('sb') === '0') document.body.classList.add('sb-off'); } catch(e) {}
+  // Restore sidebar state only on mobile; on desktop always show it
+  if (isMobile()) {
+    try { if (localStorage.getItem('sb') === '0') document.body.classList.add('sb-off'); } catch(e) {}
+  } else {
+    document.body.classList.remove('sb-off');
+  }
 })();
+// When resizing from mobile to desktop, ensure sidebar is always visible
+window.addEventListener('resize', function() {
+  if (!isMobile()) {
+    document.body.classList.remove('sb-off');
+  }
+});
 
 // ── Category filter ───────────────────────────────
 function filterCat(el, cat) {
